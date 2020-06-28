@@ -24,7 +24,7 @@ main {
 
 header {
     padding: 1rem;
-    
+
     > h1 {
         font-size: 1.5em;
 
@@ -41,7 +41,7 @@ header {
 
 main>header {
     padding: 0;
-    margin: 0 -0.5rem 3rem;
+    margin: 15vh -0.5rem 3rem;
     display: flex;
     flex-direction: row-reverse;
     justify-content: left;
