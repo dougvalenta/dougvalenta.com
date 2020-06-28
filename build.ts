@@ -1,6 +1,19 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'fs';
 import { join, basename } from 'path';
 import * as marked from 'marked';
+import { renderSync } from 'node-sass';
+
+marked.use({
+    renderer: {
+        link: (href, title, text) => {
+            if (href.startsWith('https://')) {
+                return `<a href="${href}" target="_blank" ${title ? `title="${title}"` : ''}>${text}</a>`
+            } else {
+                return `<a href="${href}" ${title ? `title="${title}"` : ''}>${text}</a>`
+            }
+        }
+    } as marked.Renderer,
+});
 
 const capitalize = (title: string) => {
     return title.charAt(0).toUpperCase() + title.substring(1);
@@ -28,3 +41,7 @@ pageFilenames.forEach((pageFilename) => {
     const outputFile = join(outputPath, 'index.html');
     writeFileSync(outputFile, template.replace('__PAGE_TITLE__', title).replace('__PAGE_CONTENT__', content));
 });
+
+writeFileSync(join(publicPath, 'style.css'), renderSync({
+    file: join(__dirname, 'sass', 'style.scss'),
+}).css);

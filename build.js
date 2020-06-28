@@ -3,6 +3,19 @@ exports.__esModule = true;
 var fs_1 = require("fs");
 var path_1 = require("path");
 var marked = require("marked");
+var node_sass_1 = require("node-sass");
+marked.use({
+    renderer: {
+        link: function (href, title, text) {
+            if (href.startsWith('https://')) {
+                return "<a href=\"" + href + "\" target=\"_blank\" " + (title ? "title=\"" + title + "\"" : '') + ">" + text + "</a>";
+            }
+            else {
+                return "<a href=\"" + href + "\" " + (title ? "title=\"" + title + "\"" : '') + ">" + text + "</a>";
+            }
+        }
+    }
+});
 var capitalize = function (title) {
     return title.charAt(0).toUpperCase() + title.substring(1);
 };
@@ -27,3 +40,6 @@ pageFilenames.forEach(function (pageFilename) {
     var outputFile = path_1.join(outputPath, 'index.html');
     fs_1.writeFileSync(outputFile, template.replace('__PAGE_TITLE__', title).replace('__PAGE_CONTENT__', content));
 });
+fs_1.writeFileSync(path_1.join(publicPath, 'style.css'), node_sass_1.renderSync({
+    file: path_1.join(__dirname, 'sass', 'style.scss')
+}).css);
