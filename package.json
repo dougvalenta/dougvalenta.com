@@ -1,0 +1,15 @@
+{
+    "private": true,
+    "dependencies": {
+        "@types/marked": "^1.1.0",
+        "@types/node": "^14.0.14",
+        "@types/node-sass": "^4.11.1",
+        "marked": "^1.1.0",
+        "node-sass": "^4.14.1",
+        "typescript": "^3.9.5"
+    },
+    "scripts": {
+        "site": "npx tsc && node build.js && cp -r images public",
+        "start": "npm run site && npx http-server"
+    }
+}
