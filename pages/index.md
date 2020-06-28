@@ -1,4 +1,4 @@
-I'm a developer and creator interested in games, narrative, language, and
+I'm a computer programmer and creator interested in games, narrative, language, and
 the web. You can [find me on Twitter][1].
 
 Lately, I'm creating [Mote][2] with my co-creator and husband John Zajac.
